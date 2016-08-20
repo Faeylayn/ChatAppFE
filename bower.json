@@ -1,12 +1,13 @@
 {
-  "name": "angular-seed",
-  "description": "A starter project for AngularJS",
+  "name": "chat-app-fe",
+  "description": "Basic Chat App",
   "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-seed",
+  "homepage": "",
   "license": "MIT",
   "private": true,
   "dependencies": {
     "angular": "~1.5.0",
+    "angular-cookies": "~1.5.0",
     "angular-route": "~1.5.0",
     "angular-loader": "~1.5.0",
     "angular-mocks": "~1.5.0",
