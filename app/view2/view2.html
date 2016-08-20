@@ -1,5 +1,6 @@
-<p>This is the partial for view 2.</p>
-<p>
-  Showing of 'interpolate' filter:
-  {{ 'Current version is v%VERSION%.' | interpolate }}
-</p>
+<ul>
+  <li ng-repeat="message in messages">{{message.UserName}}: {{message.text}}</li>
+</ul>
+
+<input type="text" ng-model="newMessage" placeholder="Type your message here">
+<a class="btn btn-lg btn-success" role="button" ng-click="sendMessage()">Send</a>
