@@ -36,5 +36,6 @@
   height: 300px;
   width: 300px;
   overflow-y: scroll;
-
+  overflow-x: wrap;
+  word-wrap: break-word;
 }

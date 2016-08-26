@@ -39,7 +39,6 @@ angular.module('myApp.view2', ['ngRoute']).config(['$routeProvider', function($r
     }
 
     $scope.retreiveBacklog = function() {
-      console.log($scope.messages[0]);
       $http({
         method: 'POST',
         url: 'http://localhost:5000/RetreiveMessages',
@@ -48,17 +47,10 @@ angular.module('myApp.view2', ['ngRoute']).config(['$routeProvider', function($r
         }
       }).then(function(response) {
         $scope.messages = response.data.Message.concat($scope.messages)
-
       }, function(error) {
         console.log("error", error);
       });
-
     }
-
-    $scope.logEvent = function(event) {
-      console.log(event);
-    }
-
     socket.on('Message Posted', function(msg) {
       $scope.messages.push(msg);
     })

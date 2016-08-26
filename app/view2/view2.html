@@ -2,7 +2,7 @@
 
 <a class="btn btn-sm" ng-click="retreiveBacklog()">Retreive previous messages</a>
 <ul class="chatbox">
-  <li ng-repeat="message in messages">{{message.UserName}}: {{message.text}}</li>
+  <li ng-repeat="message in messages">{{message.UserName}} {{message.Time | date:'mediumTime'}}: {{message.text}}</li>
 </ul>
 
 <input type="text" ng-model="newMessage" placeholder="Type your message here" ng-keyup="$event.keyCode == 13 && sendMessage()">

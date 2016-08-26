@@ -17,12 +17,10 @@ angular.module('myApp.view1', ['ngRoute'])
       url: 'http://localhost:5000/LoginUser',
       data: {UserName: $scope.username}
     }).then(function(response) {
-      // console.log(response);
       $cookies.put('username', $scope.username)
       $window.location.href = "/#/view2"
     }, function(error) {
       console.log("error", error);
     })
-    // console.log($scope.username);
   }
 }]);
