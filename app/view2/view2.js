@@ -1,8 +1,6 @@
 'use strict';
 
-angular.module('myApp.view2', ['ngRoute'])
-
-.config(['$routeProvider', function($routeProvider) {
+angular.module('myApp.view2', ['ngRoute']).config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/view2', {
     templateUrl: 'view2/view2.html',
     controller: 'View2Ctrl'
@@ -12,24 +10,19 @@ angular.module('myApp.view2', ['ngRoute'])
 .controller('View2Ctrl', ['$scope', '$http', '$cookies', '$window', 'socket',
   function($scope, $http, $cookies, $window, socket) {
     if (!$cookies.get('username')) {
-      $window.location.href = "/#/view1"
+      $window.location.href = "/#/view1";
     }
-    // socket.connect();
     $http({
-      method: 'GET',
+      method: 'POST',
       url: 'http://localhost:5000/RetreiveMessages',
-      data: {UserName: $scope.username}
+      data: {}
     }).then(function(response) {
-      // console.log(response);
       $scope.messages = response.data.Message
-      console.log($scope.messages);
     }, function(error) {
       console.log("error", error);
-    })
-    // $scope.messages = ["aghdsfasgfjksdgf"]
+    });
 
     $scope.sendMessage = function() {
-      console.log($scope.newMessage);
       $http({
         method: 'POST',
         url: 'http://localhost:5000/PostMessage',
@@ -38,16 +31,36 @@ angular.module('myApp.view2', ['ngRoute'])
           Text: $scope.newMessage
         }
       }).then(function(response) {
-        // response.data.UserName = $cookies.get('username')
         socket.emit('Message Sent', response.data)
-
+        $scope.newMessage = "";
       }, function(error) {
         console.log("error", error);
       })
     }
 
+    $scope.retreiveBacklog = function() {
+      console.log($scope.messages[0]);
+      $http({
+        method: 'POST',
+        url: 'http://localhost:5000/RetreiveMessages',
+        data: {
+          earliest: $scope.messages[0].Time
+        }
+      }).then(function(response) {
+        $scope.messages = response.data.Message.concat($scope.messages)
+
+      }, function(error) {
+        console.log("error", error);
+      });
+
+    }
+
+    $scope.logEvent = function(event) {
+      console.log(event);
+    }
+
     socket.on('Message Posted', function(msg) {
-      console.log(msg);
+      $scope.messages.push(msg);
     })
 
 }]);

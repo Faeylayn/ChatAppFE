@@ -28,3 +28,13 @@
   content: "";
   padding: 0;
 }
+
+.chatbox {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  height: 300px;
+  width: 300px;
+  overflow-y: scroll;
+
+}
